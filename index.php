@@ -55,10 +55,10 @@
                 <?php echo $item->category->title; ?>
             </div>
             <div class="large-1 medium-1 small-1 columns">
-                <a id="edit-link" href="#" data-id="<?php echo $item->id; ?>">Bearbeiten</a>
+                <a class="edit-link" href="#" data-id="<?php echo $item->id; ?>">Bearbeiten</a>
             </div>
             <div class="large-1 medium-1 small-1 columns">
-                <a id="delete-link" href="#" data-id="<?php echo $item->id; ?>">Löschen</a>
+                <a class="delete-link" href="#" data-id="<?php echo $item->id; ?>">Löschen</a>
             </div>
         </div>
         <?php } ?>

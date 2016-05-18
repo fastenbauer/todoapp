@@ -7,6 +7,7 @@
  */
 
 require_once ("rb.php");
+require_once ("ToDoItem.php");
 
 class ToDoRepository
 {
@@ -24,5 +25,33 @@ class ToDoRepository
 
     public function GetAllCategories() {
         return R::findAll('category');
+    }
+
+    public function SaveToDoItem(ToDoItem $item) {
+        if($item->id == 0)
+        {   // insert
+            $category = R::findOne('category', 'id = :id', [':id' => $item->category_id ]);
+            if($category != null) // Kategorie gefunden
+            {
+                $todo = R::dispense('todoitem');
+                $todo->title = $item->title;
+                $todo->tofinish = $item->tofinish;
+                $todo->finished = $item->finished;
+                $todo->category = $category;
+                return R::store($todo);
+            }
+        } else { // update
+
+        }
+    }
+
+    public function DeleteToDoItem($id) {
+        try {
+            $item = R::findOne('todoitem', 'id = :id', [':id' => $id]);
+            R::trash($item);
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
     }
 }
